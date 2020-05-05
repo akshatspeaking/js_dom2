@@ -6,5 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Basic Counter App</title>
   </head>
-  <body></body>
+  <body>
+
+    <h1>0</h1>
+    <button class="increment">Increment</button>
+    <button class="decrement">Decrement</button>
+    <button class="reset">Reset</button>
+
+    <script>
+
+      let inc = document.querySelector(".increment")
+      let dec = document.querySelector(".decrement")
+      let res = document.querySelector(".reset")
+      inc.addEventListener("click", () => {
+        let c = document.querySelector("h1");
+        c.innerText = Number(c.innerText) + 1;
+      } );
+      dec.addEventListener("click", () => {
+        let c = document.querySelector("h1");
+        c.innerText = Number(c.innerText) - 1;
+      } );
+      res.addEventListener("click", () => {
+        let c = document.querySelector("h1");
+        c.innerText = 0;
+      } );
+
+
+    </script>
+  </body>
 </html>
