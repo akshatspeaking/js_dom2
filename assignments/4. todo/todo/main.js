@@ -32,13 +32,14 @@ function updateUI(arr) {
       let checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.classList.add("check")
+      checkbox.classList.add("checkbox");
       checkbox.checked = obj.isDone;
       let noteText = document.createElement("p");
-    
       noteText.classList.add("note")
       let cross = document.createElement("span");
       cross.innerText = "X";
       cross.classList.add("span")
+      cross.classList.add("delete")
 
       item.append(checkbox, noteText, cross);
       list.append(item);
@@ -119,9 +120,11 @@ function editNote(e) {
    let tempId = e.target.parentElement.getAttribute("data-id");
    para.style.display = "none";
    let tempInput = document.createElement("input");
+   tempInput.classList.add("tempInput")
    tempInput.value = para.innerText;
    let nextEl = e.target.parentElement.children[2];
-   e.target.parentElement.insertBefore(tempInput, nextEl)
+   e.target.parentElement.insertBefore(tempInput, nextEl);
+   tempInput.focus();
 
    tempInput.addEventListener("keyup", (event) => {
  

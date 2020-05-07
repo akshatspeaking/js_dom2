@@ -69,7 +69,7 @@ table {
 
 ul {
    
-   border: 1px solid black;
+   border: 1px solid rgb(0, 82, 48);
    border-radius: 5px;
    width: 100%;
    color: rgb(26, 25, 25);
@@ -81,27 +81,35 @@ li {
    list-style-type: none;
    display: flex;
    flex-flow: row nowrap;
-   justify-content: space-around;
+   justify-content: space-between;
    padding: 1rem 0;
+   margin: 0.5rem;
+   align-items: center;
 }
 
 .delete {
-   /* visibility: hidden; */
+
    border: none;
    background: none;
    color: black;
    font-size: 1.2rem;
-   justify-self: self-end;
+   margin-right: 3rem;
+   scale: 1.2;
 }
 
-.delete:hover {
+/* .delete:hover {
    scale: 1.35;
-}
+} */
 
 li:hover .delete {
    visibility: visible;
    color: red;
    cursor: pointer;
+}
+
+li:hover {
+   border: 1px solid tomato;
+   border-radius: 15px;
 }
 
 h1 {
@@ -119,9 +127,28 @@ h1 {
    padding: 0.5rem;
 }
 
+
 #textin:focus {
    border-color: tomato;
 }
+
+.tempInput {
+
+
+}
+.checkbox {
+   text-align: left;
+   /* align-self: flex-start; */
+   margin-left: 3rem;
+   scale: 1.2;
+}
+
+.note {
+   text-align: left;
+   align-self: center;
+   margin: 0 1.2rem;
+}
+
 
 .checkbox:hover {
    cursor: pointer;
@@ -145,7 +172,7 @@ cursor: pointer;
 transition: ease-in-out;
    }
 
-span {
+.itemsLeft {
    text-align: left;
    width: 70%;
 }
