@@ -126,6 +126,13 @@ function editNote(e) {
    e.target.parentElement.insertBefore(tempInput, nextEl);
    tempInput.focus();
 
+   tempInput.onblur = () => {
+      sst[tempId].note = tempInput.value;
+      para.style.display = "inline-block";
+      tempInput.style.display = "none";
+      updateUI(sst);
+   }
+
    tempInput.addEventListener("keyup", (event) => {
  
    if (event.keyCode == 13 && tempInput.value.trim() !== "") {
