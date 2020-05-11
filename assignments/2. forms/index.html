@@ -4,7 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css">
     <title>Forms</title>
   </head>
-  <body></body>
+  <body>
+
+    <div class = "form" style= "display: flex; flex-flow: column nowrap; align-items: center; height: 50vh; justify-content: space-evenly; margin-top: 5rem;">
+      <input type="text" id="name" placeholder="Full Name">
+      <p class="nametag">Name can't be empty</p>
+      <input type="email" id="email" placeholder="email@example.com">
+      <p class="emailtag">Email can't be empty</p>
+      <input type="password" id="pwd" placeholder="password">
+      <p class="pwdtag">Password can't be empty</p>
+      <button>Sign Up</button>
+    </div>
+
+    <script>
+
+      document.querySelectorAll("p").forEach(x => {x.style.display = "none"})
+
+      let nameBox = document.querySelector("#name");
+      let emailBox = document.querySelector("#email");
+      let pwdBox = document.querySelector("#pwd");
+      let btn = document.querySelector("button");
+
+      btn.addEventListener("click", () => {
+        if (nameBox.value.trim() === "") {
+          document.querySelector(".nametag").style.display = "block";
+        }
+        if (emailBox.value.trim() === "") {
+          document.querySelector(".emailtag").style.display = "block";
+        }
+        if (pwdBox.value.trim() === "") {
+          document.querySelector(".pwdtag").style.display = "block";
+        }
+
+        // else if(nameBox.value.trim() !== "" && emailBox.value.trim() !== "" && pwdBox.value.trim() !== "" && ) {
+          
+          else {
+          let nametext = nameBox.value.trim();
+          let emailtext = emailBox.value.trim();
+          let pwdtext = pwdBox.value.trim();
+
+          let summary = document.createElement("p");
+          summary.innerHTML = "You are " + nametext + "<br>" + "Email ID: " + emailtext + "<br>" + "Password: " + pwdtext; 
+          
+          document.querySelector(".form").style.display = "none";
+          document.querySelector("body").append(summary);
+
+        }
+
+      })
+      
+    </script>
+
+  </body>
 </html>

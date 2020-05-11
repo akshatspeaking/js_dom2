@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <title>Document</title>
+</head>
+<body>
+
+   <div class="modal">
+      <span class="cross">X</span>
+   </div>
+   <div class="container">
+
+
+   </div>
+
+   <script>
+      
+   
+
+
+      let data = [
+  {
+    image:
+      "http://data.mavo.io/portfolio/images/pasted-image-1494464667397.png",
+    name: "Carwash",
+    category: "Painting",
+  },
+  {
+    image:
+      "http://data.mavo.io/portfolio/images/pasted-image-1494528264937.png",
+    name: "Muck Mouth",
+    category: "Painting",
+  },
+  {
+    image:
+      "http://data.mavo.io/portfolio/images/pasted-image-1494528646446.png",
+    name: "Fishwall",
+    category: "Painting",
+  },
+  {
+    image: "http://data.mavo.io/portfolio/images/web-coffe-marilyn.jpg",
+    name: "Web Coffe Marilyn",
+    category: "Painting",
+  },
+  {
+    image:
+      "http://data.mavo.io/portfolio/images/pasted-image-1494903924970.png",
+    name: "Web 3 Jules",
+    category: "Painting",
+  },
+  {
+    image: "http://data.mavo.io/portfolio/images/web-electric3.jpg",
+    name: "Web electric3",
+    category: "Painting",
+  },
+];
+
+let container = document.querySelector(".container");
+data.forEach(item => {
+
+   let section = document.createElement("div");
+   section.classList.add("section");
+   let img = document.createElement("img");
+   img.src = item.image;
+   let button = document.createElement("button");
+   button.classList.add(data.indexOf(item));
+   container.append(section);
+   section.append(img, button);
+})
+
+document.querySelectorAll("button").forEach(btn => {
+   btn.addEventListener("click", showModal)
+})
+
+function showModal(e) {
+   let id = e.target.className;
+   document.querySelector(".modal").innerHTML = "<span class='cross'>X</span>";
+   document.querySelector(".modal").style.display = "block";
+   let image = document.createElement("img");
+   image.setAttribute("src", data[id].image);
+   document.querySelector(".modal").append(image);
+   let name = data[id].name ;
+   let category = data[id].category;
+   document.querySelector(".modal").append(name, document.createElement('br'), category);
+   document.querySelector(".cross").addEventListener("click", (e) => {
+   document.querySelector(".modal").style.display = "none";
+})
+
+document.querySelector(".cross").addEventListener("click", (e) => {
+   document.querySelector(".modal").style.display = "none";})
+}
+
+   </script>
+</body>
+</html>
