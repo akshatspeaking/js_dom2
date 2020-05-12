@@ -1,4 +1,6 @@
-let sst = [];
+
+let sst = JSON.parse(localStorage.getItem("items")) || [];
+updateUI(JSON.parse(localStorage.getItem("items")));
 let input = document.querySelector("#textin");
 let list = document.querySelector("ul");
 input.addEventListener("keyup", addTodo);
@@ -12,14 +14,22 @@ document.querySelector(".fas").addEventListener("click", selectAll)
 function addTodo(e) {
    let inputText = input.value.trim();
    if (e.keyCode == 13 && inputText !== "") {
-      sst.push({note: input.value, isDone: false})
+      sst.push({note: input.value, isDone: false});
+      localStorage.setItem("items", JSON.stringify(sst));
       input.value = "";
+      updateUI(sst); 
    }
-   updateUI(sst); 
+   
 };
 
 //FN - Display/Refresh SST items on UI
 function updateUI(arr) {
+
+   let input = document.querySelector("#textin");
+   let list = document.querySelector("ul");
+
+   localStorage.setItem("items", JSON.stringify(sst));
+
    list.innerHTML = "";
    
    arr.forEach((obj, i) => {
@@ -37,7 +47,7 @@ function updateUI(arr) {
       let noteText = document.createElement("p");
       noteText.classList.add("note")
       let cross = document.createElement("span");
-      cross.innerText = "X";
+      cross.innerText = `X`;
       cross.classList.add("span")
       cross.classList.add("delete")
 
@@ -45,7 +55,7 @@ function updateUI(arr) {
       list.append(item);
 
       if (obj.isDone) {
-         noteText.innerHTML = "<del>" + obj.note + "</del>";
+         noteText.innerHTML = "<s>" + obj.note + "</s>";
       }
       else {noteText.innerHTML = obj.note;}   
    })
@@ -61,12 +71,28 @@ function updateUI(arr) {
       if (!obj.isDone) {noLeft++;}
    });
    document.querySelector(".itemsLeft").innerText = noLeft;
+
+   if (document.querySelectorAll("li").length > 0) {
+      document.querySelector(".fas").style.visibility = "visible";
+   }
+   if (document.querySelectorAll("li").length == 0) {
+      document.querySelector(".fas").style.visibility = "hidden";
+   }
+
+
+   
 }
 // FN - on checkbox Complete checked items
 function checkBoxClick(e) {
    let id = e.target.parentElement.dataset.id;
    sst[id].isDone = !sst[id].isDone;
    updateUI(sst);
+   if (document.querySelectorAll("li").length == sst.filter(x => (x.isDone)).length) {
+      document.querySelector(".fas").click();
+   }
+   if (document.querySelectorAll("li").length == sst.filter(x => (!x.isDone)).length) {
+      document.querySelector(".fas").click();
+   }
 }
 
 //FN - DELETE X SPAN
@@ -96,6 +122,8 @@ function showCompleted() {
 function clearCompleted() {
    sst = sst.filter(obj => obj.isDone == false)
    updateUI(sst);
+   document.querySelector(".fas").click();
+
 }
 
 // Select All button
@@ -106,11 +134,13 @@ function selectAll() {
       sst.forEach(x => {x.isDone = true});
       updateUI(sst);
       cnt = true;
+      document.querySelector(".fas").style.color = "#737373";
    }
    else if(cnt) {
       sst.forEach(x => {x.isDone = false});
       updateUI(sst);
       cnt = false;
+      document.querySelector(".fas").style.color = "#e6e6e6"
    }
 }
 
@@ -125,6 +155,8 @@ function editNote(e) {
    let nextEl = e.target.parentElement.children[2];
    e.target.parentElement.insertBefore(tempInput, nextEl);
    tempInput.focus();
+   tempInput.nextElementSibling.style.visibility = "hidden";
+   tempInput.parentElement.children[0].style.visibility = "hidden";
 
    tempInput.onblur = () => {
       sst[tempId].note = tempInput.value;
